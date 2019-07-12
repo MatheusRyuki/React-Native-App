@@ -9,7 +9,9 @@ const store = configureStore();
 
 const AppNavigator = createStackNavigator(
   {
-    Home: Auth,
+    Home: {
+      screen: Auth,
+    }
   });
 
   let Navigation = createAppContainer(createSwitchNavigator (
