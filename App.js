@@ -1,23 +1,19 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator , createStackNavigator } from 'react-navigation';
+import MainTabs from './screens/MainTabs/startMainTabs';
 import Auth from './screens/auth/Auth';
+import React from 'react';
 
+const AppNavigator = createStackNavigator(
+  {
+    Home: Auth,
+  });
 
-
-class SettingsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>
-      </View>
-    );
+export default createAppContainer(createSwitchNavigator (
+  {
+    Home: AppNavigator,
+    Screen: MainTabs,
+  },
+  {
+    initialRouteName: 'Home',
   }
-}
-
-const TabNavigator = createBottomTabNavigator({
-  Home: Auth,
-  Settings: SettingsScreen,
-});
-
-export default createAppContainer(TabNavigator);
+));
