@@ -5,8 +5,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 
 const TabNavigator = createBottomTabNavigator({
-  SharePlace: SharePlace,
-  FindPlace: FindPlace,
+  'Compartilhar local': SharePlace,
+  'Encontrar local': FindPlace,
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({
@@ -14,12 +14,9 @@ const TabNavigator = createBottomTabNavigator({
       const { routeName } = navigation.state;
       let IconComponent = Icon;
       let iconName;
-      if (routeName === 'Home') {
-        iconName = "ios-trash";
-       
-      } else if (routeName === 'FindPlace') {
+      if (routeName === 'Encontrar local') {
         iconName = 'ios-map';
-      } else if (routeName === 'SharePlace') {
+      } else if (routeName === 'Compartilhar local') {
         iconName = 'ios-share-alt';
       }
 
@@ -28,7 +25,7 @@ const TabNavigator = createBottomTabNavigator({
     },
   }),
   tabBarOptions: {
-    activeTintColor: 'tomato',
+    activeTintColor: 'green',
     inactiveTintColor: 'gray',
   },
 });
