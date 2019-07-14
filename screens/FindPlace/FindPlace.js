@@ -13,7 +13,8 @@ class FindPlaceScreen extends Component {
         title: this.props.places.find(place => {
           return place.key === key;
         }).name,
-        selectedPlace: selPlace
+        selectedPlace: selPlace,
+        key: key,
       }
     );
   };

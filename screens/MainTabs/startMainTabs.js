@@ -6,8 +6,8 @@ import React from 'react';
 import Details from '../PlaceDetail/PlaceDetail';
 
 const TabNavigator = createBottomTabNavigator({
-  'Compartilhar local': SharePlace,
   'Encontrar local': FindPlace,
+  'Compartilhar local': SharePlace,
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({

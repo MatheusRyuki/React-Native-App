@@ -1,13 +1,17 @@
 import React from 'react';
 import { View, Text, Button, Image, StyleSheet, TouchableOpacity }  from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { createStackNavigator } from 'react-navigation';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 const placeDetail = props => {
   const selectedPlace = props.navigation.state.params;
-
-  console.log(selectedPlace);
   
+  const placeDeletedHandler = () => {
+    props.onDeletePlace(selectedPlace.selectedPlace.key);
+    props.navigation.pop();
+  };
+
   return (
     <View style={styles.container}>
       <View>
@@ -16,7 +20,7 @@ const placeDetail = props => {
       </View>
        <View>
         <View style={styles.icon}>
-          <TouchableOpacity onPress={props.onDelete}>
+          <TouchableOpacity onPress={placeDeletedHandler}>
             <Icon name="ios-trash" size={30} color="red" />
           </TouchableOpacity>
         </View>
@@ -45,4 +49,11 @@ const styles = StyleSheet.create({
   }, 
 });
 
-export default placeDetail;
+const mapDispatchToProps = dispatch => {
+  return {
+    onDeletePlace: (key) => dispatch(actions.deletePlace(key)),
+  };
+};
+
+
+export default connect(null, mapDispatchToProps)(placeDetail);

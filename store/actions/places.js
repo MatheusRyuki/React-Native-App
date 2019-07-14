@@ -7,8 +7,9 @@ export const addPlace = (placeName) => {
   };
 };
 
-export const deletePlace = () => {
+export const deletePlace = (key) => {
   return {
     type: action.DELETE_PLACE,
+    key: key,
   };
 };
