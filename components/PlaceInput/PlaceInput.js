@@ -3,22 +3,14 @@ import { View, StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 class PlaceInput extends Component {
-  state = {
-    placeName: '',
-  }
-
-  placeNameChangeHandler = placeName => {
-    this.setState({placeName})
-  }
-
   render() {
     return (
       <View style={styles.inputContainer}>
       <TextInput
       label="Nome do Local"
-      value={this.state.placeName}
+      value={this.props.placeName}
       style={styles.input}
-      onChangeText={this.placeNameChangeHandler}/>
+      onChangeText={this.props.onChangeText}/>
     </View>
     );
   }

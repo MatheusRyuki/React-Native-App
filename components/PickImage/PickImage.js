@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image } from 'react-native'.
+import { View, Image } from 'react-native';
 import { Buttton } from 'react-native-paper';
 import BackgroundImage from '../../assets/download.jpg';
 

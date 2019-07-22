@@ -27,9 +27,19 @@ class SharePlaceScreen extends Component {
   }
 };
 
-  placeAddedHandler = placeName => {
-    this.props.onAddPlace(placeName);
-  };
+state = {
+  placeName: ""
+}
+
+placeNameChangeHandler = placeName => {
+  this.setState({placeName})
+}
+
+placeAddedHandler = () => {
+  if(this.state.placeName.trim() !== "") {
+    this.props.onAddPlace(this.state.placeName);
+  }
+}
 
   render() {
     return (
@@ -40,10 +50,12 @@ class SharePlaceScreen extends Component {
         <PickLocation />
         <View style={styles.inputContainer}> 
         <PlaceInput
+          placeName={this.state.placeName}
+          onChangeText={this.placeNameChangeHandler}
             />
             </View>
             <View style={styles.button}> 
-            <Button mode="contained" icon="share">Compartilhe!</Button>
+            <Button mode="contained" icon="share" onPress={this.placeAddedHandler}>Compartilhe!</Button>
             </View>
             </View>
       </ScrollView>
