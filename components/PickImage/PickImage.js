@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Image } from 'react-native';
-import { Buttton } from 'react-native-paper';
+import { View, Image, StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
 import BackgroundImage from '../../assets/download.jpg';
 
 class PickImage extends Component {

@@ -1,6 +1,6 @@
-import { createAppContainer, createSwitchNavigator , createStackNavigator } from 'react-navigation';
-import MainTabs from './screens/MainTabs/startMainTabs';
 import Auth from './screens/auth/Auth';
+import MainTabs from './screens/MainTabs/startMainTabs';
+import { createAppContainer, createSwitchNavigator , createStackNavigator } from 'react-navigation'; 
 import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';

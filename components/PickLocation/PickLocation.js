@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Buttton, Text } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 
 class PickLocation extends Component {
   render() {

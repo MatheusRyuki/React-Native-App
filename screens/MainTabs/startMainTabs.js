@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import Details from '../PlaceDetail/PlaceDetail';
 
-
 const FindPlaceNow = createStackNavigator({
   Home: FindPlace,
 });
@@ -65,6 +64,13 @@ const MyDrawerNavigator = createDrawerNavigator({
     },
   },
   Conta: Conta,
+  Logout: {
+    screen: Navigation,
+    navigationOptions: {
+      drawerLabel: 'Sair',
+      drawerIcon: <Icon name="ios-log-out" size={30} color="green" />
+    },
+  },
 });
 
 export default MyDrawerNavigator;
