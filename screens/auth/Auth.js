@@ -31,7 +31,7 @@ class AuthScreen extends Component {
           </Button>
           <View style={styles.inputContainer}>
             <TextInput
-              mode='outlined'
+              mode='flat'
               label='Email'
               selectionColor="gray"
               style={styles.input}
@@ -39,14 +39,14 @@ class AuthScreen extends Component {
               onChangeText={email => this.setState({ email })}
             />
             <TextInput
-              mode='outlined'
+              mode='flat'
               label='Senha'
               style={styles.input}
               value={this.state.senha}
               onChangeText={senha => this.setState({ senha })}
             />
             <TextInput
-              mode='outlined'
+              mode='flat'
               label='Confirmar senha'
               style={styles.input}
               value={this.state.senha2}
