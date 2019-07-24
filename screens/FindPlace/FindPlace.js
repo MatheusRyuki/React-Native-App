@@ -12,11 +12,11 @@ class FindPlaceScreen extends Component {
 
   if (Platform.OS === 'android') {
     content = <TouchableNativeFeedback onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-    <Icon name="ios-menu" size={30} color="black" />
+    <Icon name="ios-menu" size={30} color="orange" />
     </TouchableNativeFeedback>
   } else {
     content = <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-    <Icon name="ios-menu" size={30} color="black" />
+    <Icon name="ios-menu" size={30} color="orange" />
     </TouchableOpacity>
   };
       return {

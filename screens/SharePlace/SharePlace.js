@@ -18,7 +18,7 @@ class SharePlaceScreen extends Component {
     },
     headerLeft: 
       <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-    <Icon name="ios-menu" size={30} color="black" />
+    <Icon name="ios-menu" size={30} color="orange" />
     </TouchableOpacity>
     ,
     headerLeftContainerStyle: {
