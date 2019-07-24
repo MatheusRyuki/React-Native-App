@@ -7,12 +7,18 @@ import BackgroundImage from '../../assets/download.jpg';
 class AuthScreen extends Component {
   constructor (props) {
     super(props)
-    Dimensions.addEventListener("change", (dims) => {
-      this.setState({
-        viewMode: Dimensions.get("window").height > 500 ? "portrait" : "landscape",
-      });
-    });
+    Dimensions.addEventListener("change", this.updatedStyles);
   }
+
+  componentWillUnmount() {
+    Dimensions.removeEventListener("change", this.updatedStyles)
+  }
+
+  updatedStyles = (dims) => {
+    this.setState({
+      viewMode: Dimensions.get("window").height > 500 ? "portrait" : "landscape",
+    });
+  };
 
   static navigationOptions = {
     title: 'Login',
@@ -103,7 +109,8 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
-    margin: 8,
+    marginTop: 8,
+    marginBottom: 8,
     backgroundColor: 'white'
   },
   textHeading: {
