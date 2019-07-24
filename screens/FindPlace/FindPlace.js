@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, Platform, TouchableNativeFeedback} from 'react-native';
 import { connect } from 'react-redux';
 import PlaceList from '../../components/PlaceList/PlaceList';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { DrawerActions } from 'react-navigation-drawer';
 
+
 class FindPlaceScreen extends Component {
   static navigationOptions = ({ navigation }) => {
+  let content = null;
+
+  if (Platform.OS === 'android') {
+    content = <TouchableNativeFeedback onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+    <Icon name="ios-menu" size={30} color="black" />
+    </TouchableNativeFeedback>
+  } else {
+    content = <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+    <Icon name="ios-menu" size={30} color="black" />
+    </TouchableOpacity>
+  };
       return {
       title: 'Encontrar local',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      headerLeft: 
-        <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-      <Icon name="ios-menu" size={30} color="black" />
-      </TouchableOpacity>
-      ,
+      headerLeft: content,
       headerLeftContainerStyle: {
         paddingLeft: 10
       }

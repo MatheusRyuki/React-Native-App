@@ -5,6 +5,7 @@ import Conta from '../SideDrawer/SideDrawer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import Details from '../PlaceDetail/PlaceDetail';
+import { Platform } from 'react-native';
 
 const FindPlaceNow = createStackNavigator({
   Home: FindPlace,
@@ -25,9 +26,9 @@ const TabNavigator = createBottomTabNavigator({
       let IconComponent = Icon;
       let iconName;
       if (routeName === 'Encontrar local') {
-        iconName = 'ios-map';
+        iconName = Platform.OS === 'android' ? 'md-map' : 'ios-map';
       } else if (routeName === 'Compartilhar local') {
-        iconName = 'ios-share-alt';
+        iconName = Platform.OS === 'android' ? 'md-share-alt' : 'ios-share-alt';
       }
 
       // You can return any component that you like here!
@@ -60,7 +61,7 @@ const MyDrawerNavigator = createDrawerNavigator({
     screen: Navigation,
     navigationOptions: {
       drawerLabel: 'Lugares',
-      drawerIcon: <Icon name="ios-map" size={30} color="green" />
+      drawerIcon: <Icon name={"ios-map"} size={30} color="green" />
     },
   },
   Conta: Conta,
@@ -68,7 +69,7 @@ const MyDrawerNavigator = createDrawerNavigator({
     screen: Navigation,
     navigationOptions: {
       drawerLabel: 'Sair',
-      drawerIcon: <Icon name="ios-log-out" size={30} color="green" />
+      drawerIcon: <Icon name={Platform.OS === 'android' ? "md-log-out" : "ios-log-out"} size={30} color="green" />
     },
   },
 });
