@@ -1,38 +1,61 @@
 import React from 'react';
-import { View, Text, Button, Image, StyleSheet, TouchableOpacity, Platform }  from 'react-native';
+import { View, Text, Button, Image, StyleSheet, TouchableOpacity, Platform, Dimensions }  from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
-const placeDetail = props => {
-  const selectedPlace = props.navigation.state.params;
+class placeDetail extends React.Component { 
+  state = {
+    viewMode: "portrait"
+  }
+
+  constructor (props) {
+    super(props);
+    Dimensions.addEventListener("change", this.updateStyles)
+  }
+
+  updateStyles = dims => {
+    this.setState({viewMode: dims.window.height > 500 ? "portrait" : "landscape"})
+  }
+
+  componentWillUnmount() {
+    Dimensions.removeEventListener("change", this.updateStyles);
+  };
+
+  render () {
+  const selectedPlace = this.props.navigation.state.params;
   
   const placeDeletedHandler = () => {
-    props.onDeletePlace(selectedPlace.selectedPlace.key);
-    props.navigation.pop();
+    this.props.onDeletePlace(selectedPlace.selectedPlace.key);
+    this.props.navigation.pop();
   };
 
   return (
-    <View style={styles.container}>
-      <View>
+    <View style={[styles.container, this.state.viewMode === "portrait" ? styles.portraitContainer : styles.landscapeContainer]}>
+      <View style={styles.subContainer}>
          <Image source={selectedPlace.selectedPlace.image} style={styles.placeImage}/>
         <Text style={styles.placeName}>{selectedPlace.selectedPlace.name}</Text>
-      </View>
-       <View>
         <View style={styles.icon}>
           <TouchableOpacity onPress={placeDeletedHandler}>
             <Icon name={Platform.OS === 'android' ? "md-trash" : "ios-trash"} size={30} color="red" />
           </TouchableOpacity>
         </View>
-        <Button title={'fechar'} onPress={props.onClose}/>
       </View> 
     </View>
   )
+  }
 };
 
 const styles = StyleSheet.create({
   container: {
     margin: 22,
+    flex: 1,
+  },
+  portraitContainer: {
+    flexDirection: "column"
+  },
+  landscapeContainer: {
+    flexDirection: "row",
   },
   placeImage: {
     width: '100%',
@@ -46,7 +69,10 @@ const styles = StyleSheet.create({
   icon: {
     justifyContent: 'center',
     alignItems: 'center',
-  }, 
+  },
+  subContainer: {
+    flex: 1,
+  }
 });
 
 const mapDispatchToProps = dispatch => {
