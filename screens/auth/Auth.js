@@ -9,11 +9,7 @@ class AuthScreen extends Component {
     super(props)
     Dimensions.addEventListener("change", (dims) => {
       this.setState({
-        respStyles: {
-          direction: Dimensions.get("window").height > 500 ? "column" : "row",
-          justifyContent: Dimensions.get("window").height > 500 ? "flex-start" : "space-between",
-          width: Dimensions.get("window").height > 500 ? "100%" : "45%"
-        }
+        viewMode: Dimensions.get("window").height > 500 ? "portrait" : "landscape",
       });
     });
   }
@@ -29,11 +25,7 @@ class AuthScreen extends Component {
     email: '',
     senha: '',
     senha2: '',
-    respStyles: {
-      direction:  "column",
-      justifyContent: "flex-start",
-      width: "100%"
-    }
+    viewMode:  Dimensions.get("window").height > 500 ? "portrait" : "landscape",
   };
 
   loginHandler = () => {
@@ -43,7 +35,7 @@ class AuthScreen extends Component {
   render() {
     let headingText = null;
 
-    if (Dimensions.get("window").height > 500) {
+    if (this.state.viewMode === 'portrait') {
       headingText = <Text style={styles.textHeading}>Por favor, faça login!</Text>;
     }
 
@@ -61,11 +53,12 @@ class AuthScreen extends Component {
               value={this.state.email}
               onChangeText={email => this.setState({ email })}
             />
-            <View style={{
-              flexDirection: this.state.respStyles.direction,
-              justifyContent: this.state.respStyles.justifyContent,
-            }}>
-              <View style={{width: this.state.respStyles.width}}>
+            <View style={this.state.viewMode === 'portrait'
+             ? styles.portraitContainer 
+             : styles.landscapeContainer}>
+              <View style={this.state.viewMode === 'portrait'
+             ? styles.portraitWrapper 
+             : styles.landscapeWrapper}>
                 <TextInput
                   mode='flat'
                   label='Senha'
@@ -74,7 +67,9 @@ class AuthScreen extends Component {
                   onChangeText={senha => this.setState({ senha })}
                 />
               </View>
-              <View style={{width: this.state.respStyles.width}}>
+              <View style={this.state.viewMode === 'portrait'
+               ? styles.portraitWrapper
+                : styles.landscapeWrapper}>
                 <TextInput
                   mode='flat'
                   label='Confirmar senha'
@@ -118,6 +113,20 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: '80%'
   },
+  portraitContainer: {
+    flexDirection: "column",
+    justifyContent: "flex-start"
+  },
+  landscapeContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  portraitWrapper: {
+    width: "100%"
+  },
+  landscapeWrapper: {
+    width: "45%"
+  }
 });
 
 export default AuthScreen;
