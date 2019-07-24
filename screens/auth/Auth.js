@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ImageBackground } from 'react-native';
-import { Text, Button, TextInput  } from 'react-native-paper';
+import { View, StyleSheet, ImageBackground, TouchableOpacity, Dimensions } from 'react-native';
+import { TextInput  } from 'react-native-paper';
+import { Button, Text } from 'native-base';
 import BackgroundImage from '../../assets/download.jpg';
 
 class AuthScreen extends Component {
+  constructor (props) {
+    super(props)
+    Dimensions.addEventListener("change", (dims) => {
+      this.setState({
+        respStyles: {
+          direction: Dimensions.get("window").height > 500 ? "column" : "row",
+          justifyContent: Dimensions.get("window").height > 500 ? "flex-start" : "space-between",
+          width: Dimensions.get("window").height > 500 ? "100%" : "45%"
+        }
+      });
+    });
+  }
+
   static navigationOptions = {
     title: 'Login',
     headerTitleStyle: {
@@ -15,6 +29,11 @@ class AuthScreen extends Component {
     email: '',
     senha: '',
     senha2: '',
+    respStyles: {
+      direction:  "column",
+      justifyContent: "flex-start",
+      width: "100%"
+    }
   };
 
   loginHandler = () => {
@@ -22,13 +41,17 @@ class AuthScreen extends Component {
   }
 
   render() {
+    let headingText = null;
+
+    if (Dimensions.get("window").height > 500) {
+      headingText = <Text style={styles.textHeading}>Por favor, faça login!</Text>;
+    }
+
+
     return (
       <ImageBackground source={BackgroundImage} style={styles.backgroundImage}> 
       <View style={styles.container}>
-          <Text style={styles.textHeading}>Por favor, faça login!</Text>
-          <Button mode="contained">
-            Mudar para Login
-          </Button>
+          {headingText}
           <View style={styles.inputContainer}>
             <TextInput
               mode='flat'
@@ -38,24 +61,35 @@ class AuthScreen extends Component {
               value={this.state.email}
               onChangeText={email => this.setState({ email })}
             />
-            <TextInput
-              mode='flat'
-              label='Senha'
-              style={styles.input}
-              value={this.state.senha}
-              onChangeText={senha => this.setState({ senha })}
-            />
-            <TextInput
-              mode='flat'
-              label='Confirmar senha'
-              style={styles.input}
-              value={this.state.senha2}
-              onChangeText={senha2 => this.setState({ senha2 })}
-            />
+            <View style={{
+              flexDirection: this.state.respStyles.direction,
+              justifyContent: this.state.respStyles.justifyContent,
+            }}>
+              <View style={{width: this.state.respStyles.width}}>
+                <TextInput
+                  mode='flat'
+                  label='Senha'
+                  style={styles.input}
+                  value={this.state.senha}
+                  onChangeText={senha => this.setState({ senha })}
+                />
+              </View>
+              <View style={{width: this.state.respStyles.width}}>
+                <TextInput
+                  mode='flat'
+                  label='Confirmar senha'
+                  style={styles.input}
+                  value={this.state.senha2}
+                  onChangeText={senha2 => this.setState({ senha2 })}
+                />
+              </View>
+            </View>
           </View>
-          <Button mode="contained" onPress={this.loginHandler}>
-            Login
+          <TouchableOpacity >
+          <Button primary onPress={this.loginHandler}> 
+            <Text>Login</Text>
           </Button>
+          </TouchableOpacity>    
       </View>
       </ImageBackground>
     )
@@ -83,7 +117,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: '80%'
-  }
+  },
 });
 
 export default AuthScreen;
